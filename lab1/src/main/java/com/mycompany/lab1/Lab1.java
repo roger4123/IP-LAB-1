@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package com.mycompany.lab1;
+/* package com.mycompany.lab1; */
 
 /**
  *
@@ -10,7 +10,7 @@ package com.mycompany.lab1;
  */
 
 interface Vehicle {
-    void displayType();
+    void displayCarInfo();
     public String getModel();
     public String getDriver();
     public String[] getPassengers();
@@ -70,10 +70,10 @@ class ElectricCar extends Car {
     }
     
     @Override
-    public void displayType() {
-        System.out.println("Electric car ");
+    public void displayCarInfo() {
+        System.out.println("Electric car - Brand" + getModel() + " - Driver: " + getDriver() + " - Battery capacity: " + batteryCap + "kWh.");
     }
-    
+
 }
 
 class CombustionCar extends Car {
@@ -83,12 +83,42 @@ class CombustionCar extends Car {
         super(model, driver);
         this.fuelCap = capacity;
     }
+
+    @Override
+    public void displayCarInfo() {
+        System.out.println("Fuel car - Brand" + getModel() + " - Driver: " + getDriver() + " - Fuel capacity: " + fuelCap + "kWh.");
+    }
+
 }
 
 
 public class Lab1 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Vehicle Tesla = new ElectricCar("Tesla", "Elon", 100);
+        Vehicle Dacia = new CombustionCar("Dacia", "Ion", 50);
+
+        ((Car) Tesla).addPassenger("John");
+        ((Car) Dacia).addPassenger("Gelu");
+
+        ((Car) Tesla).addPassenger("James");
+        ((Car) Dacia).addPassenger("Gheorghe");
+
+        displayCarDetails(Tesla);
+        displayCarDetails(Dacia);
     }
+        public static void displayCarDetails(Vehicle Car)
+        {
+            Car.displayCarInfo();
+            System.out.println("Passengers: " );
+            for(String passenger : Car.getPassengers())
+            {
+               if (passenger != null)
+               {
+                   System.out.println(passenger + " ");
+               }
+            }
+            System.out.println();
+        }
+
 }
